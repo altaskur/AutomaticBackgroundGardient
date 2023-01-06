@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{
+            margin: 0;
+        }
+        figure {
+            width: 99.8vw;
+            height: 98.8vh;
+
+            margin: 0;
+            padding: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        img {
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+    <title>AutomaticBackgroundGradient</title>
+</head>
+<body>
+    <figure>
+        <img src="https://picsum.photos/200/200" crossorigin="anonymous">
+    </figure>
+
+    <script>
+        const body = document.querySelector("body")
+
+        const image = document.querySelector('img');
+        const figure = document.querySelector("figure");
+
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+
+        const leftEdgeColorCounts = {};
+        const rightEdgeColorCounts = {};
+
+        image.addEventListener("load", function () {
+            canvas.width = image.width;
+            canvas.height = image.height;
+
+            const sensibility = image.width * 0.40;
+            const rightSide = image.width - sensibility;
+
+            context.drawImage(image, 0, 0, image.width, image.height);
+
+            const leftSideData = context.getImageData(0, 0, sensibility, image.height).data;
+            const rightSideData = context.getImageData(rightSide, 0, sensibility, image.height).data;
+            console.log(rightSideData)
+            for (let i = 0; i < leftSideData.length; i += 4 * sensibility) {
+
+                const colorLeft = `rgb(${leftSideData[i]}, ${leftSideData[i + 1]}, ${leftSideData[i + 2]})`;
+                if (leftEdgeColorCounts[colorLeft]) {
+                  leftEdgeColorCounts[colorLeft]++;
+                } else {
+                  leftEdgeColorCounts[colorLeft] = 1;
+                }
+
+                const colorRight = `rgb(${rightSideData[i]}, ${rightSideData[i + 1]}, ${rightSideData[i + 2]})`;
+                if (rightEdgeColorCounts[colorRight]) {
+                  rightEdgeColorCounts[colorRight]++;
+                } else {
+                  rightEdgeColorCounts[colorRight] = 1;
+                }
+
+            }
+
+        const leftEdgeColorCountsArray = Object.entries(leftEdgeColorCounts);
+        const leftEdgeDominantColor = leftEdgeColorCountsArray[0][0];
+
+        const rightEdgeColorCountsArray = Object.entries(rightEdgeColorCounts);
+        const rightEdgeDominantColor = rightEdgeColorCountsArray[0][0];
+
+
+        figure.style.background = `linear-gradient(to right, ${leftEdgeDominantColor}, ${rightEdgeDominantColor})`;
+
+    });
+    </script>
+</body>
+</html>
