@@ -7,7 +7,7 @@
 
 Un pequeño ejercicio practicando con canvas, en el que analizamos una imagen y creamos un color de fondo, según sus bordes
 
-Puedes ver la [versión live aquí](./src/index.html).
+Puedes ver la [versión live aquí](https://altaskur.github.io/AutomaticBackgroundGardient/src/index.html).
 
 Para ello utilizamos un canvas creado en Js para dibujar la imagen dentro pero con el tamaño que queramos analizar de la imagen.
 con la propiedad `drawImage`
