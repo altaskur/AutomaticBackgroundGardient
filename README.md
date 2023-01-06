@@ -3,6 +3,8 @@
 
 [![GitHub top language](https://img.shields.io/github/languages/top/altaskur/AutomaticBackgroundGardient?style=for-the-badge)](/) [![GitHub](https://img.shields.io/github/license/altaskur/AutomaticBackgroundGardient?style=for-the-badge)](/)
 
+![example](/assets/example.png)
+
 Un pequeño ejercicio practicando con canvas, en el que analizamos una imagen y creamos un color de fondo, según sus bordes
 
 Puedes ver la [versión live aquí](./src/index.html).
