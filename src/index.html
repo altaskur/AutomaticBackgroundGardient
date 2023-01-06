@@ -9,8 +9,8 @@
             margin: 0;
         }
         figure {
-            width: 99.8vw;
-            height: 98.8vh;
+            width: 100vw;
+            height: 100vh;
 
             margin: 0;
             padding: 0;
@@ -54,7 +54,7 @@
 
             const leftSideData = context.getImageData(0, 0, sensibility, image.height).data;
             const rightSideData = context.getImageData(rightSide, 0, sensibility, image.height).data;
-            console.log(rightSideData)
+        
             for (let i = 0; i < leftSideData.length; i += 4 * sensibility) {
 
                 const colorLeft = `rgb(${leftSideData[i]}, ${leftSideData[i + 1]}, ${leftSideData[i + 2]})`;
@@ -79,7 +79,8 @@
         const rightEdgeColorCountsArray = Object.entries(rightEdgeColorCounts);
         const rightEdgeDominantColor = rightEdgeColorCountsArray[0][0];
 
-
+        console.log("LeftColor: ",leftEdgeDominantColor)
+        console.log("RightColor: ",rightEdgeDominantColor)
         figure.style.background = `linear-gradient(to right, ${leftEdgeDominantColor}, ${rightEdgeDominantColor})`;
 
     });
